@@ -1,0 +1,10 @@
+# Ignoring directories
+Listings/
+Objects/
+RTE/
+
+# Ignoring files
+*.scvd
+*.Larry
+*.uvoptx
+*.uvprojx
