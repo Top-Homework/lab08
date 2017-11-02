@@ -2,7 +2,7 @@
 Simple assembly program that counts the number of 1's in a binary string. This program can be made more efficient.
 
 ## Table of Contents
-* [Description of Assignment](description_of_assignment)
+* [Description of Assignment](#description_of_assignment)
 * [Documentation Links](documentation_links)
 	* [Commands](commands)
 * [Algorithm](algorithm)
