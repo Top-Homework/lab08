@@ -3,11 +3,11 @@ Simple assembly program that counts the number of 1's in a binary string. This p
 
 ## Table of Contents
 * [Description of Assignment](#description-of-assignment)
-* [Documentation Links](documentation-links)
-	* [Commands](commands)
-* [Algorithm](algorithm)
-* [Variables](variables)
-* [Pseudocode](pseudocode)
+* [Documentation Links](#documentation-links)
+	* [Commands](#commands)
+* [Algorithm](#algorithm)
+* [Variables](#variables)
+* [Pseudocode](#pseudocode)
 * [Assembly Code](#assembly-code)
 
 ## Description of Assignment
