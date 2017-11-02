@@ -1,9 +1,10 @@
 # lab08
-Simple assembly program that counts the number of 1's in a binary string. This program can be made more efficient.
+Simple assembly program that counts the number of 1's in a binary string. This program can be made more efficient. This program has only been tested using Keil uVision5 using the Keil simulator.
 
 ## Table of Contents
 * [Description of Assignment](#description-of-assignment)
-* [Documentation Links](#documentation-links)
+* [Constraints](#constraints)
+* [Documentation](#documentation)
 	* [Commands](#commands)
 * [Algorithm](#algorithm)
 * [Variables](#variables)
@@ -13,7 +14,18 @@ Simple assembly program that counts the number of 1's in a binary string. This p
 ## Description of Assignment
 Write an ARM assembly language program that counts the number of 1’s for any value in R0. The program must assemble/compile in KEIL and must be able to run in the KEIL simulator. Generally, R0 may contain any value, but for purpose of this exercise, you may move 0x2345ABCD into R0. The number in R0 does not need be preserved. You may use any other registers as you need. The result, total count of 1’s in R0, should be in R1 when the program ends.
 
-## Documentation Links
+## Constraints
+We are allowed to use the following 8 instructions:
+1. LDR
+2. MOV
+3. CMP
+4. BEQ
+5. CLZ
+6. ADD
+7. LSL
+8. BNE
+
+## Documentation
 ### Commands
 * [LDR](http://www.keil.com/support/man/docs/armasm/armasm_dom1361289873425.htm)
 * [LSL](http://www.keil.com/support/man/docs/armasm/armasm_dom1361289876185.htm)
@@ -29,8 +41,8 @@ Write an ARM assembly language program that counts the number of 1’s for any v
 
 ## Variables
 * r0 - Stores the test value
-* r1 - Stores the number of leading zeroes from r0
-* r2 - Counts leading 0's (counter)
+* r1 - Counts leading 0's (counter)
+* r2 - Stores the number of leading zeroes from r0
 
 ## Steps
 * Initialize register 0 the hexidecimal value 0x2345ABCD

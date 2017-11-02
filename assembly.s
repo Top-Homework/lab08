@@ -14,16 +14,21 @@ __main
 	ldr r0, =0x2345ABCD	; This is how you assign large value to r0. mov will not work
 						; due to the immediate (imm16) only having a range from 
 						; 0 - 65,535. 0x2345ABCD is 591,768,525 in decimal.
-	mov r1, #0 ; intialize r1 to 0
-	mov r2, #0 ; intialize r2 to 0
+	mov r1, #0			; intialize r1 to 0
+	mov r2, #0			; intialize r2 to 0
 while
-	clz r1, r0	; The clz instruction counts the number of leading zeros in the
-				; value in Rm and returns the result in Rd. The result value is 32
-				; if no bits are set in the source register, and zero if bit 31 is
-				; set. r1 should contain 2 after the cls intruction is run.
-	lsl r0, r0, #1 ; Shift left by one bit
-	cmp r1, #32
-	blt while
+	clz r2, r0			; The clz instruction counts the number of leading zeros.
+	lsl r0, r0, #1 		; Shift left by one bit
+	cmp r2, #0			; If register 2 has no leading zeroes
+	beq increment			; then branch to increment
+	cmp r2, #32			; If register has any number other than 32 leading zeroes
+	bne while				; then loop gain from the top of this loop
+	cmp r2, #32			; If register 2 has 32 leading zeroes
+	beq stop				; then we branch to stop (We are done!)
+	
+increment
+	add r1, #1 			; Increment by one
+	b while
 	
 stop B stop
 	
