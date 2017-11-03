@@ -1,5 +1,5 @@
 # lab08
-Simple assembly program that counts the number of 1's in a binary string. This program can be made more efficient. This program has only been tested using Keil uVision5 using the Keil simulator.
+Simple assembly program that counts the number of 1's in a binary string. This program can be made more efficient. This program has only been tested on Keil uVision5 using the Keil simulator.
 
 ## Table of Contents
 * [Description of Assignment](#description-of-assignment)
@@ -7,8 +7,8 @@ Simple assembly program that counts the number of 1's in a binary string. This p
 * [Documentation](#documentation)
 	* [Commands](#commands)
 * [Algorithm](#algorithm)
+* [Steps](#steps)
 * [Variables](#variables)
-* [Pseudocode](#pseudocode)
 * [Assembly Code](#assembly-code)
 
 ## Description of Assignment
@@ -35,52 +35,53 @@ We are allowed to use the following 8 instructions:
 * [Condition Code Suffixes](http://www.keil.com/support/man/docs/armasm/armasm_dom1361289860997.htm)
 
 ## Algorithm
-* While the number of 0's is less than 32
-	* Count the number of 0's
-	* If the number of 0's is zero then increment by one (This means that a 1 is in the most significant bit)
+* While the number of 0's is not equal to 32
+	* Count the number of leading 0's
+	* Shift binary string left by 1 bit
+	* If binary string contains no leading 0's then increment counter (This means that a 1 is in the most significant bit)
+	* If binary string contains 32 leading 0's then we stop (We are done!)
+
+## Steps
+* Initialize register 0 the hexidecimal value 0x2345ABCD
+* Initialize register 1 to zero
+* Initialize register 2 to zero
+* loop
+	* Count leading 0's of register 0 and place count in register 2
+	* Shift binary string of register 0 left by one bit
+	* If r2 is zero then increment register 1 (counter) by 1
+		* Increment register 1
+		* repeat loop
+	* If r2 is anything other than 32 then repeat loop
+	* If r2 is 32 then we stop
 
 ## Variables
 * r0 - Stores the test value
 * r1 - Counts leading 0's (counter)
 * r2 - Stores the number of leading zeroes from r0
 
-## Steps
-* Initialize register 0 the hexidecimal value 0x2345ABCD
-* Initialize register 1 to zero
-* Initialize register 2 to zero
-* Compare r1 with #32
-* While the number of 0's is less than 32
-* Count leading 0's of register 0 and place count in register 1
-* If r1 is zero then increment register 2 (counter) by 1
-* Shift binary string of register 0 left by one bit
-
-## Pseudocode
-* ldr r0, =0x2345ABCD
-* mov r1, #0
-* mov r2, #0
-
-* while
-	* clz r1, r0
-	* lsl r0, r0, #1
-	* cmp r1, #32
-	* blt while
-
-
-
-
 ## Assembly Code
 ```
 __main
 
-	ldr r0, =0x2345ABCD	; This is how you assign a large value to r0. mov will not work due to the immediate
-				(imm16) only having a range from 0 - 65,535. 0x2345ABCD is 591,768,525 in decimal.
-	mov r1, #0 ; intialize r1 to 0
-	mov r2, #0 ; intialize r2 to 0
-while
-	clz r1, r0	; The clz instruction counts the number of leading zeros in the value in Rm and returns the
-			result in Rd. The result value is 32 if no bits are set in the source register, and zero if bit
-			31 is set. r1 should contain 2 after the cls intruction is run.
-	lsl r0, r0, #1 ; Shift left by one bit
+	ldr r0, =0x2345ABCD	; This is how you assign large value to r0. mov will not work
+					; due to the immediate (imm16) only having a range from 
+					; 0 - 65,535. 0x2345ABCD is 591,768,525 in decimal.
+	mov r1, #0		; intialize r1 to 0
+	mov r2, #0		; intialize r2 to 0
+loop
+	clz r2, r0		; The clz instruction counts the number of leading zeros.
+	lsl r0, r0, #1 		; Shift left by one bit
+	cmp r2, #0		; If register 2 has no leading zeroes
+	beq increment			; then branch to increment
+	cmp r2, #32		; If register has any number other than 32 leading zeroes
+	bne loop			; then loop again from the top of this loop
+	cmp r2, #32		; If register 2 has 32 leading zeroes
+	beq stop			; then we branch to stop (We are done!)
+	
+increment
+	add r1, #1 		; Increment by one
+	b loop				; repeat loop
+	
 stop B stop
 	
 	END

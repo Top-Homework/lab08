@@ -16,19 +16,19 @@ __main
 						; 0 - 65,535. 0x2345ABCD is 591,768,525 in decimal.
 	mov r1, #0			; intialize r1 to 0
 	mov r2, #0			; intialize r2 to 0
-while
+loop
 	clz r2, r0			; The clz instruction counts the number of leading zeros.
 	lsl r0, r0, #1 		; Shift left by one bit
 	cmp r2, #0			; If register 2 has no leading zeroes
 	beq increment			; then branch to increment
 	cmp r2, #32			; If register has any number other than 32 leading zeroes
-	bne while				; then loop gain from the top of this loop
+	bne loop				; then repeat loop
 	cmp r2, #32			; If register 2 has 32 leading zeroes
 	beq stop				; then we branch to stop (We are done!)
 	
 increment
 	add r1, #1 			; Increment by one
-	b while
+	b loop					; repeat loop
 	
 stop B stop
 	
