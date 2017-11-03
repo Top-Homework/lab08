@@ -1,5 +1,5 @@
 # lab08
-Simple assembly program that counts the number of 1's in a binary string. This program can be made more efficient. This program has only been tested on Keil uVision5 using the Keil simulator.
+Simple assembly program that counts the number of 1's in a binary string. This program has only been tested on Keil uVision5 using the Keil simulator. The number of instructions can be reduced. This can be done by implementing only one loop and using only 2 registers.
 
 ## Table of Contents
 * [Description of Assignment](#description-of-assignment)
